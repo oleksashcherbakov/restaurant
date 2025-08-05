@@ -1,10 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
-</head>
-<body>
-$END$
-</body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+    <title>Home page</title>
+{% endblock %}
+
+{% block content %}
+    <h1>Welcome to kitchen</h1>
+    <h2>Kitchen includes:</h2>
+    <ul>
+        <li>Quantity of dishes: {{ number_dishes }}</li>
+        <li>Quantity of cooks: {{number_cooks }}</li>
+        <li>Quantity of type of dishes: {{ number_type_dishes }}</li>
+    </ul>
+{% endblock %}
