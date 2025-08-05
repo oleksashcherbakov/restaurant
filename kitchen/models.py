@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
+
 class DishType(models.Model):
     name = models.CharField(max_length=100)
 
@@ -35,4 +36,3 @@ class Cook(AbstractUser):
 
     def __str__(self):
         return f"username: {self.username}, experience: {self.years_of_experience}"
-
