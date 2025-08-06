@@ -16,7 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from kitchen.views import index, DishTypeListView, DishListView
+from kitchen.views import index, DishTypeListView, DishListView, DishDetailView
 
 
 urlpatterns = [
@@ -24,6 +24,7 @@ urlpatterns = [
     path("", index, name="index"),
     path("dish-type/", DishTypeListView.as_view(), name="dish-type-list"),
     path("dishes/", DishListView.as_view(), name="dish-list"),
+    path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
 ]
 
 
