@@ -16,13 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from kitchen.views import index, DishTypeListView
+from kitchen.views import index, DishTypeListView, DishListView
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index, name="index"),
     path("dish-type/", DishTypeListView.as_view(), name="dish-type-list"),
+    path("dishes/", DishListView.as_view(), name="dish-list"),
 ]
 
 
