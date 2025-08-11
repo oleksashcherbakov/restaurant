@@ -15,16 +15,22 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path
-from kitchen.views import index, DishTypeListView, DishListView, DishDetailView
+from django.urls import path, include
+from debug_toolbar.toolbar import debug_toolbar_urls
+from rest_framework import routers
+
+from API_kitchen.views import DishTypeViewSet, CookViewSet, DishViewSet
+
+router = routers.DefaultRouter()
+
+router.register("dishtypes", DishTypeViewSet)
+router.register("cooks", CookViewSet)
+router.register("dishes", DishViewSet)
 
 
 urlpatterns = [
-    path("", index, name="index"),
-    path("dish-type/", DishTypeListView.as_view(), name="dish-type-list"),
-    path("dishes/", DishListView.as_view(), name="dish-list"),
-    path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
+    path("", include(router.urls)),
 ]
 
 
-app_name = "kitchen"
+app_name = "API_kitchen"

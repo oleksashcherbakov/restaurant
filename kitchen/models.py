@@ -7,7 +7,7 @@ class DishType(models.Model):
     name = models.CharField(max_length=100, unique=True, null=False, blank=False)
 
     class Meta:
-        ordering = ('name', )
+        ordering = ("name", )
 
     def __str__(self):
         return self.name
@@ -19,6 +19,7 @@ class Dish(models.Model):
     price = models.DecimalField(decimal_places=2, max_digits=10)
     dish_type = models.ForeignKey(DishType, on_delete=models.CASCADE, related_name="dishes")
     cooks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dishes")
+    is_expensive = models.BooleanField(default=False)
 
     class Meta:
         ordering = ("name", )
@@ -27,6 +28,9 @@ class Dish(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def is_expensive(self):
+        return self.price > 100
 
 class Cook(AbstractUser):
     years_of_experience = models.IntegerField(null=True, blank=True)

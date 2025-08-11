@@ -39,6 +39,10 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "debug_toolbar",
     "kitchen",
+    "user",
+    "rest_framework",
+    "API_kitchen",
+
 ]
 
 MIDDLEWARE = [
