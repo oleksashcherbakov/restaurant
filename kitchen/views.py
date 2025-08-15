@@ -17,7 +17,7 @@ def index(request):
         "number_dishes": number_dishes,
         "number_cooks": number_cooks,
         "number_type_dishes": number_type_dishes,
-        "num_visits": num_visits
+        "num_visits": num_visits,
     }
     return render(request, "kitchen/index.html", context=context)
 

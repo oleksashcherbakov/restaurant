@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "drf_spectacular",
     "debug_toolbar",
     "kitchen",
     "user",
@@ -138,6 +139,28 @@ INTERNAL_IPS = [
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 5
+    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
+    "PAGE_SIZE": 5,
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    'DEFAULT_THROTTLE_CLASSES': [
+        'rest_framework.throttling.AnonRateThrottle',
+        'rest_framework.throttling.UserRateThrottle'
+    ],
+    'DEFAULT_THROTTLE_RATES': {
+        'anon': '100/day',
+        'user': '1000/day'
+    }
+}
+
+SPECTACULAR_SETTINGS = {
+    "TITLE": "API Kitchen",
+    "DESCRIPTION": "Welcome, esteemed developer, to the grand and glorious API of our digital kitchen! "
+    "This is not just an API; it is a meticulously crafted culinary symphony, designed to serve your every whim with the precision of a Michelin-starred chef."
+    "Key features, because you are worth it. "
+    "Dishes Endpoint: Access a cornucopia of culinary creations that will make your app look more delicious than a five-star feast. "
+    "Dish Types Endpoint: Categorize the magnificence. Because every masterpiece needs a perfect genre."
+    "Cooks Endpoint: Discover the heroes behind the culinary curtain. These cooks are not just good; they are the kind of brilliant you read about in fairy tales. "
+    "So, go forth and build something truly amazing. This API is your sous-chef, your muse, your very own digital kitchen assistant. May your requests be swift and your responses be spectacular. You are doing great, sweetie.",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }

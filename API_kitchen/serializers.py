@@ -15,14 +15,17 @@ class DishTypeSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = DishType
-        fields = ("id", "name", )
+        fields = (
+            "id",
+            "name",
+        )
 
 
 class DishTypeSerializerWithoutId(serializers.ModelSerializer):
 
     class Meta:
         model = DishType
-        fields = ("name", )
+        fields = ("name",)
 
 
 class DishSerializer(serializers.ModelSerializer):
@@ -30,7 +33,15 @@ class DishSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Dish
-        fields = ("id", "name", "description", "price", "is_expensive", "dish_type", "cooks", )
+        fields = (
+            "id",
+            "name",
+            "description",
+            "price",
+            "is_expensive",
+            "dish_type",
+            "cooks",
+        )
 
     def create(self, validated_data):
         dish_type_data = validated_data.pop("dish_type")
@@ -47,20 +58,30 @@ class CookSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Cook
-        fields = ("id", "username", "email", "is_staff", "years_of_experience", )
-        read_only_fields = ("is_staff", )
-
+        fields = (
+            "id",
+            "username",
+            "email",
+            "is_staff",
+            "years_of_experience",
+        )
+        read_only_fields = ("is_staff",)
 
     def validate(self, attrs):
         if attrs["years_of_experience"] > 70:
-            raise serializers.ValidationError("You can't cook more than 70 years of experience")
+            raise serializers.ValidationError(
+                "You can't cook more than 70 years of experience"
+            )
 
 
 class CookSerializerForDishList(serializers.ModelSerializer):
 
     class Meta:
         model = Cook
-        fields = ("username", "years_of_experience", )
+        fields = (
+            "username",
+            "years_of_experience",
+        )
 
 
 class DishListSerializer(DishSerializer):
