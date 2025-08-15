@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.contrib.auth.models import AbstractUser
 from django.db import models
+from rest_framework.exceptions import ValidationError
 
 
 class DishType(models.Model):
@@ -9,14 +10,15 @@ class DishType(models.Model):
     class Meta:
         ordering = ("name", )
 
+
     def __str__(self):
         return self.name
 
 
 class Dish(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True, null=False, blank=False)
     description = models.TextField()
-    price = models.DecimalField(decimal_places=2, max_digits=10)
+    price = models.DecimalField(decimal_places=2, max_digits=10, null=False, blank=False)
     dish_type = models.ForeignKey(DishType, on_delete=models.CASCADE, related_name="dishes")
     cooks = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name="dishes")
     is_expensive = models.BooleanField(default=False)
@@ -25,6 +27,7 @@ class Dish(models.Model):
         ordering = ("name", )
         verbose_name_plural = "dishes"
 
+
     def __str__(self):
         return self.name
 
@@ -32,11 +35,23 @@ class Dish(models.Model):
     def is_expensive(self):
         return self.price > 100
 
+
 class Cook(AbstractUser):
     years_of_experience = models.IntegerField(null=True, blank=True)
 
     class Meta:
         ordering = ("years_of_experience", )
+
+
+    def clean(self):
+        if self.years_of_experience > 70:
+            raise ValidationError("You can't cook more than 70 years of experience")
+
+
+    def save(self, *args, **kwargs):
+        self.full_clean()
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         return f"username: {self.username}, experience: {self.years_of_experience}"

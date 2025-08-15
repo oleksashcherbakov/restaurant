@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     "user",
     "rest_framework",
     "API_kitchen",
-
 ]
 
 MIDDLEWARE = [
@@ -137,3 +136,8 @@ AUTH_USER_MODEL = "kitchen.Cook"
 INTERNAL_IPS = [
     "127.0.0.1",
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.LimitOffsetPagination',
+    'PAGE_SIZE': 5
+}
