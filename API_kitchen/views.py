@@ -62,32 +62,32 @@ class DishTypeViewSet(viewsets.ModelViewSet):
 @extend_schema(
     parameters=[
         OpenApiParameter(
-            name='price',
-            description='Filter dishes by price. Returns all dishes cheaper than the given value.',
+            name="price",
+            description="Filter dishes by price. Returns all dishes cheaper than the given value.",
             required=False,
             type=OpenApiTypes.NUMBER,
             location=OpenApiParameter.QUERY,
             examples=[
                 OpenApiExample(
-                    'Find cheap dishes',
-                    summary='Example: $15.00',
-                    description='Finds all dishes that are cheaper than 15.00',
-                    value='15.00'
+                    "Find cheap dishes",
+                    summary="Example: $15.00",
+                    description="Finds all dishes that are cheaper than 15.00",
+                    value="15.00",
                 ),
             ],
         ),
         OpenApiParameter(
-            name='name',
-            description='Filter by a dish name',
+            name="name",
+            description="Filter by a dish name",
             required=False,
             type=OpenApiTypes.STR,
             location=OpenApiParameter.QUERY,
             examples=[
                 OpenApiExample(
-                    'Find a specific dish',
+                    "Find a specific dish",
                     summary='Example: "Pasta"',
                     description='Finds all dishes with the name "Pasta"',
-                    value='Pasta'
+                    value="Pasta",
                 ),
             ],
         ),
@@ -99,25 +99,25 @@ class DishTypeViewSet(viewsets.ModelViewSet):
     """,
     examples=[
         OpenApiExample(
-            'Dish list example',
-            description='Example of a typical dish list response.',
+            "Dish list example",
+            description="Example of a typical dish list response.",
             value=[
                 {
                     "id": 1,
                     "name": "Spaghetti Bolognese",
                     "description": "Classic Italian dish with a rich tomato sauce.",
                     "price": 12.50,
-                    "dish_type": "Pasta"
+                    "dish_type": "Pasta",
                 },
                 {
                     "id": 2,
                     "name": "Margherita Pizza",
                     "description": "A simple yet delicious pizza with fresh tomatoes and mozzarella.",
                     "price": 10.00,
-                    "dish_type": "Pizza"
-                }
+                    "dish_type": "Pizza",
+                },
             ],
-            status_codes=["200"]
+            status_codes=["200"],
         ),
     ],
     summary="A menu for the gods.",
@@ -140,7 +140,6 @@ class DishViewSet(viewsets.ModelViewSet):
             return DishListSerializer
 
         return DishSerializer
-
 
 
 @extend_schema(

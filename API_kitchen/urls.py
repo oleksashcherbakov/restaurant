@@ -24,9 +24,9 @@ from API_kitchen.views import DishTypeViewSet, CookViewSet, DishViewSet
 
 router = routers.DefaultRouter()
 
-router.register("dishtypes", DishTypeViewSet)
-router.register("cooks", CookViewSet)
-router.register("dishes", DishViewSet)
+router.register("dishtypes", DishTypeViewSet, basename="dishtypes")
+router.register("cooks", CookViewSet, basename="cooks")
+router.register("dishes", DishViewSet, basename="dishes")
 
 
 urlpatterns = [
