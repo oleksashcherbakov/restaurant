@@ -44,6 +44,7 @@ class DishTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
     template_name = "kitchen/dish_type_form.html"
     success_url = reverse_lazy("kitchen:dish-type-list")
 
+
 class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
     model = DishType
     success_url = reverse_lazy("kitchen:dish-type-list")
@@ -57,3 +58,23 @@ class DishListView(generic.ListView):
 
 class DishDetailView(generic.DetailView):
     model = Dish
+
+
+class DishCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Dish
+    fields = "__all__"
+    template_name = "kitchen/dish_form.html"
+    success_url = reverse_lazy("kitchen:dish-list")
+
+
+class DishUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = Dish
+    fields = "__all__"
+    template_name = "kitchen/dish_form.html"
+    success_url = reverse_lazy("kitchen:dish-list")
+
+
+class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = Dish
+    success_url = reverse_lazy("kitchen:dish-list")
+    template_name = "kitchen/dish_confirm_delete.html"

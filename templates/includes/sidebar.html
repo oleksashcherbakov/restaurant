@@ -1,6 +1,6 @@
 {% block sidebar%}
 <ul class="sidebar-nav">
-  <li><a href="#">Home</a></li>
+  <li><a href="{% url 'kitchen:index' %}">Home</a></li>
   <li><a href="{% url 'kitchen:dish-list' %}">All dishes</a></li>
   <li><a href="{% url 'kitchen:dish-type-list' %}">All type of dishes</a></li>
   <li><a href="#">All cooks</a></li>

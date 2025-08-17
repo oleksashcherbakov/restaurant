@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from kitchen.views import index, DishTypeListView, DishListView, DishDetailView, DishTypeCreateView, DishTypeUpdateView, DishTypeDeleteView
+from kitchen.views import index, DishTypeListView, DishListView, DishDetailView, DishTypeCreateView, DishTypeUpdateView, DishTypeDeleteView, DishCreateView, DishUpdateView, DishDeleteView
 
 
 urlpatterns = [
@@ -28,6 +28,9 @@ urlpatterns = [
     path("dish-type/<int:pk>/delete", DishTypeDeleteView.as_view(), name="dish-type-delete"),
     path("dishes/", DishListView.as_view(), name="dish-list"),
     path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
+    path("dish/create", DishCreateView.as_view(), name="dish-create"),
+    path("dish/<int:pk>/update", DishUpdateView.as_view(), name="dish-update"),
+    path("dish/<int:pk>/delete", DishDeleteView.as_view(), name="dish-delete"),
 ]
 
 
