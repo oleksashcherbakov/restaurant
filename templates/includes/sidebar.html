@@ -3,6 +3,6 @@
   <li><a href="{% url 'kitchen:index' %}">Home</a></li>
   <li><a href="{% url 'kitchen:dish-list' %}">All dishes</a></li>
   <li><a href="{% url 'kitchen:dish-type-list' %}">All type of dishes</a></li>
-  <li><a href="#">All cooks</a></li>
+  <li><a href="{% url 'kitchen:cooks-list' %}">All cooks</a></li>
 </ul>
 {% endblock%}

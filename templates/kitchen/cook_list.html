@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Cooks <a style="float: right" href="#">+</a></h1>
+  {% if cook_list %}
+    <table class="table">
+      <tr>
+        <th>ID</th>
+        <th>Username</th>
+        <th>Update</th>
+        <th>Delete</th>
+      </tr>
+      {% for cook in cook_list %}
+        <tr>
+          <td>{{ cook.id }}</td>
+          <td>{{ cook.username }}</td>
+          <td><a href="{% url 'kitchen:cook-update' pk=cook.id %}">UPDATE</a></td>
+          <td><a href="#">DELETE</a></td>
+        </tr>
+      {% endfor %}
+    </table>
+  {% else %}
+    <p>There are no cooks</p>
+  {% endif %}
+{% endblock %}
