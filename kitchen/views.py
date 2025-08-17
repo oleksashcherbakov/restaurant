@@ -1,6 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render
 from django.views import generic
 from django.views.generic import ListView
+from rest_framework.reverse import reverse_lazy
 
 from kitchen.models import Dish, Cook, DishType
 
@@ -26,12 +28,31 @@ class DishTypeListView(generic.ListView):
     model = DishType
     template_name = "kitchen/dish_type_list.html"
     context_object_name = "dish_type_list"
-    paginate_by = 5
+    paginate_by = 10
+
+
+class DishTypeCreateView(LoginRequiredMixin, generic.CreateView):
+    model = DishType
+    fields = ["name"]
+    template_name = "kitchen/dish_type_form.html"
+    success_url = reverse_lazy("kitchen:dish-type-list")
+
+
+class DishTypeUpdateView(LoginRequiredMixin, generic.UpdateView):
+    model = DishType
+    fields = ["name"]
+    template_name = "kitchen/dish_type_form.html"
+    success_url = reverse_lazy("kitchen:dish-type-list")
+
+class DishTypeDeleteView(LoginRequiredMixin, generic.DeleteView):
+    model = DishType
+    success_url = reverse_lazy("kitchen:dish-type-list")
+    template_name = "kitchen/dish_type_confirm_delete.html"
 
 
 class DishListView(generic.ListView):
     model = Dish
-    paginate_by = 5
+    paginate_by = 20
 
 
 class DishDetailView(generic.DetailView):
