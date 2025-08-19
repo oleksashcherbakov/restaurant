@@ -1,5 +1,19 @@
 {% block sidebar%}
 <ul class="sidebar-nav">
+  {% if user.is_authenticated %}
+    <li> {{ user.username }} </li>
+    <li>
+        <form action="{% url 'logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit" style="background:none; border:none; cursor:pointer; color:#007bff; text-decoration:underline;">
+                Logout
+            </button>
+        </form>
+    </li>
+  {% else %}
+    <li><a href="{% url 'login' %}">Login</a></li>
+  {% endif %}
+  <br>
   <li><a href="{% url 'kitchen:index' %}">Home</a></li>
   <li><a href="{% url 'kitchen:dish-list' %}">All dishes</a></li>
   <li><a href="{% url 'kitchen:dish-type-list' %}">All type of dishes</a></li>

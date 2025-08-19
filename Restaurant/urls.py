@@ -27,6 +27,7 @@ from drf_spectacular.views import (
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("kitchen/", include("kitchen.urls", namespace="kitchen")),
+    path("registration/", include("django.contrib.auth.urls")),
     path("api/v1/", include("API_kitchen.urls", namespace="API_kitchen")),
     # YOUR PATTERNS
     path("api/v1/schema/", SpectacularAPIView.as_view(), name="schema"),

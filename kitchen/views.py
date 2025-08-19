@@ -4,6 +4,7 @@ from django.views import generic
 from django.views.generic import ListView
 from rest_framework.reverse import reverse_lazy
 
+from kitchen.forms import CookCreationForm, DishSearchForm
 from kitchen.models import Dish, Cook, DishType
 
 
@@ -56,6 +57,23 @@ class DishListView(generic.ListView):
     paginate_by = 20
 
 
+    def get_context_data(self, *, object_list=None, **kwargs):
+        queryset = Dish.objects.all()
+        context = super(DishListView, self).get_context_data(**kwargs)
+        dish = self.request.GET.get("dish", "")
+        context["search_form"] = DishSearchForm(
+            initial={"dish": dish}
+        )
+        return context
+
+    def get_queryset(self):
+        queryset = Dish.objects.all()
+        name = self.request.GET.get("dish")
+        if name:
+            return queryset.filter(name__icontains=name)
+        return queryset
+
+
 class DishDetailView(generic.DetailView):
     model = Dish
 
@@ -80,6 +98,11 @@ class DishDeleteView(LoginRequiredMixin, generic.DeleteView):
     template_name = "kitchen/dish_confirm_delete.html"
 
 
+class CookCreateView(LoginRequiredMixin, generic.CreateView):
+    model = Cook
+    form_class = CookCreationForm
+
+
 class CookListView(generic.ListView):
     model = Cook
     paginate_by = 20
@@ -94,3 +117,4 @@ class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
+
