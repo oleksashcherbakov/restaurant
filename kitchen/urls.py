@@ -17,28 +17,38 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from kitchen.views import (index,
-                           DishTypeListView,
-                           DishListView,
-                           DishDetailView,
-                           DishTypeCreateView,
-                           DishTypeUpdateView,
-                           DishTypeDeleteView,
-                           DishCreateView,
-                           DishUpdateView,
-                           DishDeleteView,
-                           CookListView,
-                           CookCreateView,
-                           CookUpdateView,
-                           CookDetailView)
+from kitchen.views import (
+    index,
+    DishTypeListView,
+    DishListView,
+    DishDetailView,
+    DishTypeCreateView,
+    DishTypeUpdateView,
+    DishTypeDeleteView,
+    DishCreateView,
+    DishUpdateView,
+    DishDeleteView,
+    CookListView,
+    CookCreateView,
+    CookUpdateView,
+    CookDetailView,
+)
 
 
 urlpatterns = [
     path("", index, name="index"),
     path("dish-type/create", DishTypeCreateView.as_view(), name="dish-type-create"),
     path("dish-type/", DishTypeListView.as_view(), name="dish-type-list"),
-    path("dish-type/<int:pk>/update", DishTypeUpdateView.as_view(), name="dish-type-update"),
-    path("dish-type/<int:pk>/delete", DishTypeDeleteView.as_view(), name="dish-type-delete"),
+    path(
+        "dish-type/<int:pk>/update",
+        DishTypeUpdateView.as_view(),
+        name="dish-type-update",
+    ),
+    path(
+        "dish-type/<int:pk>/delete",
+        DishTypeDeleteView.as_view(),
+        name="dish-type-delete",
+    ),
     path("dishes/", DishListView.as_view(), name="dish-list"),
     path("dishes/<int:pk>/", DishDetailView.as_view(), name="dish-detail"),
     path("dish/create", DishCreateView.as_view(), name="dish-create"),

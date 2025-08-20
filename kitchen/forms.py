@@ -16,4 +16,3 @@ class DishSearchForm(forms.Form):
         label="",
         widget=forms.TextInput(attrs={"placeholder": "search by dish"}),
     )
-

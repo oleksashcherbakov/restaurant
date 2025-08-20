@@ -56,14 +56,11 @@ class DishListView(generic.ListView):
     model = Dish
     paginate_by = 20
 
-
     def get_context_data(self, *, object_list=None, **kwargs):
         queryset = Dish.objects.all()
         context = super(DishListView, self).get_context_data(**kwargs)
         dish = self.request.GET.get("dish", "")
-        context["search_form"] = DishSearchForm(
-            initial={"dish": dish}
-        )
+        context["search_form"] = DishSearchForm(initial={"dish": dish})
         return context
 
     def get_queryset(self):
@@ -117,4 +114,3 @@ class CookUpdateView(LoginRequiredMixin, generic.UpdateView):
 
 class CookDetailView(LoginRequiredMixin, generic.DetailView):
     model = Cook
-
